@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
+    <meta name=format-detection content="telephone=no">
+    <title>做头等舱</title>
+    <script src="./js/config.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+
+            overflow: hidden;
+            overflow-y: auto;
+
+            width: 100%;
+            max-width: 640px;
+            height: 100%;
+            margin: auto;
+        }
+
+        .main {
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+            background: url("./img/beijing.png") 0 0 ;
+            background-size: 100% 100%;
+        }
+        .page-1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+        .page-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            display: none;
+        }
+        
+        .template {
+            position: absolute;
+            width: 80%;
+            height: 10rem;
+            top:20px;
+            left: 10%;
+            overflow: hidden;
+        }
+        .autograph_container {
+            position: absolute;
+            top: 12rem;
+            left: 10%;
+            width: 80%;
+            height: 5rem;
+            border: 2px solid #eee;
+            overflow: hidden;
+        }
+        img {
+            width: 100%;
+        }
+        .button_clear {
+            position: absolute;
+            top: 18rem;
+            left: 35%;
+        }
+        .btn {
+            position: absolute;
+            width: 40%;
+            height: 2rem;
+            left:30%;
+            height: 2rem;
+        }
+        .change_templage  {
+            bottom:6rem;
+            background: url("./img/anniu_1.png") 0 0 ;
+            background-size: 100% 100%;
+        }
+        .ok {
+            bottom:3rem;
+            background: url("./img/anniu_2.png") 0 0 ;
+            background-size: 100% 100%; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+
+        <div class="page-1">
+            <div class="template">
+                <img src="" alt="">
+            </div>
+            <div class="autograph_container">
+                <canvas id="c4"></canvas>
+            </div>
+            <div class="button_clear">
+                重新签名
+            </div>
+           <div class="change_templage btn"></div>
+           <div class="ok btn"></div>
+        </div>
+
+        <div class="page-2">
+            <img src = "" alt="" class="path">
+            <div style="display:none;">
+                <canvas id="textrue" wdith="320" height= 400></canvas>
+            </div>
+            <!-- <div class="page-2-img">
+                <img src="" alt="" >
+            </div> -->
+        </div>
+    </div>
+
+</body>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/canvasSign.jquery.js"></script>
+<script>
+    $(function () {
+      
+
+        let canvasWidth = parseInt($('.autograph_container').css('width'))
+        let canvasHeight = parseInt($('.autograph_container').css('height'))
+        config = {
+            width: canvasWidth,	//canvas宽度
+            height: canvasHeight,	//canvas高度
+            lineWidth: 8,	//笔画最大线条宽度
+            minLineWidth: 1,//最小线条宽度
+            maskIng: {		//遮罩 只能规定字体，并且只能垂直居中显示
+                isMask: false, //默认没有
+                maskText: '在这里签名',  //遮罩text
+                maskLineHeight: 40,	//遮罩text行高，默认40
+                maskFont: 'bold 26px 微软雅黑', //遮罩字体
+                maskColor: '#000'	//文本颜色
+            },
+            lineColor: 'block',	//线条颜色 默认黑色
+            bgColor: 'rgba(255,255,255,0)', //背景颜色
+            bgImgSrc: null,	//背景图片 默认为空
+            bgRetain: true	//false ：在写的过程中会清空背景图片及背景颜色 true ：会保留背景图片及背景颜色
+        }
+        const template = [
+            'img/iphone1.jpeg',
+            'img/anniu_2.png',
+            'img/anniu_3.png',
+        ]
+        let index = 0
+        $('#c4').canvasSign(config);
+        $('.button_clear').click(function () {
+            $('#c4').clear()
+        });
+        // 设置图片模板
+        $('.template > img').attr('src', template[0])
+        $('.change_templage').click(function() {
+            index ++
+            console.log(index)
+            if (index == template.length ) {
+                index = 0
+            }
+            $('.template > img').attr('src', template[index])
+        })
+        let dataURL = ''
+        // 生成签名
+        $('.ok').click(function () {
+            dataURL = $('#c4').getDataURL();
+            
+            $('.page-1 ').css('display','none')
+            $('.page-2 ').css('display','block')
+            // $('.page-2-img > img').attr('src', dataURL)
+            draw()
+        })
+
+        function draw() {
+            var ctx = document.getElementById('textrue').getContext('2d');
+            var imgbg = new Image()
+            var imgtextrue = new Image()
+
+            imgbg.src = template[index]
+            imgbg.onload = function () {
+                ctx.drawImage(imgbg, 0, 0,300,400)
+            }
+
+            imgtextrue.src = dataURL 
+            imgtextrue.onload = function () {
+                ctx.drawImage(imgtextrue, 0, 0, 200, 100)
+                // todataurl 跨域，应该使用本域下的图片
+                var path = document.getElementById('textrue').toDataURL()
+                console.log(path)
+                $('.path').attr('src', path)
+            }
+
+            
+        }
+
+
+        /*微信白条*/
+        $('body').on('touchmove', function (event) {
+            event.preventDefault();
+        })
+    })
+
+</script>
+
+</html>
