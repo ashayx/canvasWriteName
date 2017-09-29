@@ -7,7 +7,7 @@
     <meta name=format-detection content="telephone=no">
     <title>做头等舱</title>
     <script src="./js/config.js"></script>
-
+    <script src="js/jquery-2.1.4.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -32,9 +32,10 @@
 
             width: 100%;
             height: 100%;
-            background: url("./img/beijing.png") 0 0 ;
+            background: url("./img/beijing.png") 0 0;
             background-size: 100% 100%;
         }
+
         .page-1 {
             position: absolute;
             top: 0;
@@ -43,6 +44,7 @@
             height: 100%;
             z-index: 2;
         }
+
         .page-2 {
             position: absolute;
             top: 0;
@@ -52,55 +54,295 @@
             z-index: 1;
             display: none;
         }
-        
+
+        .share {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            display: none;
+            background: url("./img/zhezhao.png") 0 0;
+            background-size: 100% 100%;
+        }
+
         .template {
             position: absolute;
-            width: 80%;
-            height: 10rem;
-            top:20px;
-            left: 10%;
+            width: 90%;
+            height: 8rem;
+            top: 20px;
+            left: 5%;
             overflow: hidden;
         }
+
+        .template img {
+            width: 100%;
+        }
+
         .autograph_container {
             position: absolute;
-            top: 12rem;
-            left: 10%;
-            width: 80%;
+            top: 10rem;
+            left: 5%;
+            width: 90%;
             height: 5rem;
             border: 2px solid #eee;
             overflow: hidden;
         }
-        img {
-            width: 100%;
+
+        .input_container {
+            position: absolute;
+            top: 10rem;
+            left: 5%;
+            width: 90%;
+            height: 5rem;
+            border: 2px solid #eee;
+            overflow: hidden;
         }
+
+        .input_container input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            font-size: 2rem;
+        }
+
         .button_clear {
             position: absolute;
-            top: 18rem;
-            left: 35%;
+            background: url("./img/qianming_2.png") 0 0;
+            background-size: 100% 100%;
+            bottom: 7rem;
+            left: 40%;
+            width: 20%;
+            height: 0.9rem;
         }
+
         .btn {
             position: absolute;
             width: 40%;
             height: 2rem;
-            left:30%;
-            height: 2rem;
+            left: 30%;
+            height: 1.6rem;
         }
-        .change_templage  {
-            bottom:6rem;
-            background: url("./img/anniu_1.png") 0 0 ;
+
+        .change_templage {
+            bottom: 4.5rem;
+            background: url("./img/anniu_1.png") 0 0;
             background-size: 100% 100%;
         }
+
         .ok {
-            bottom:3rem;
-            background: url("./img/anniu_2.png") 0 0 ;
-            background-size: 100% 100%; 
+            bottom: 2rem;
+            background: url("./img/anniu_2.png") 0 0;
+            background-size: 100% 100%;
+        }
+
+        .photo {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 90%;
+            height: 15rem;
+            overflow: hidden;
+        }
+
+        .photo img {
+            width: 100%;
+            position: absolute;
+        }
+
+        .save {
+            position: absolute;
+            background: url("./img/baocun.png") 0 0;
+            background-size: 100% 100%;
+            bottom: 7rem;
+            left: 35%;
+            width: 30%;
+            height: .8rem;
+        }
+
+        .baidu {
+            position: absolute;
+            background: url("./img/biaoti.png") 0 0;
+            background-size: 100% 100%;
+            bottom: 5rem;
+            left: 5%;
+            width: 90%;
+            height: 1rem;
+        }
+
+        .search {
+            position: absolute;
+            background: url("./img/anniu_5.png") 0 0;
+            background-size: 100% 100%;
+            bottom: 2rem;
+            left: 5%;
+            width: 60%;
+            height: 1.5rem;
+        }
+
+        .share_btn {
+            position: absolute;
+            background: url("./img/anniu_3.png") 0 0;
+            background-size: 100% 100%;
+            bottom: 2rem;
+            right: 5%;
+            width: 27%;
+            height: 1.5rem;
+        }
+
+        input::-webkit-input-placeholder {
+            /* WebKit browsers */
+            color: #7D7D7D;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        input:-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+            color: #7D7D7D;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        input::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+            color: #7D7D7D;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        input:-ms-input-placeholder {
+            /* Internet Explorer 10+ */
+            color: #7D7D7D;
+            font-size: 30px;
+            text-align: center;
         }
     </style>
+ 
+    <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
+    <style>
+        html,
+        body,
+        iframe {
+            margin: 0;
+            padding: 0;
+        }
+
+        #nprogress {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #f7f7f7;
+            z-index: 999;
+            background: url("./img/beijing.png") 0 0;
+            background-size: 100% 100%;
+        }
+
+        .spinner-icon {
+            display: none!important;
+        }
+
+        .splash {
+            position: absolute;
+            top: 20%;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .splash img {
+            display: block;
+            width: 0.7rem;
+            position: absolute;
+            top: -0.15rem;
+            right: 0;
+        }
+
+        .card {
+            padding: 20px 25px 15px;
+            margin: 0 auto 25px;
+            width: 70%;
+        }
+
+        .mybar {
+            background: #2971FF;
+            height: .4rem;
+            border-radius: 1rem;
+            position: absolute;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        .barcontainer {
+            position: absolute;
+            top: 30%;
+            width: 95%;
+            height: .4rem;
+            left: 4%;
+            border-radius: 1rem;
+            overflow-x: hidden;
+        }
+
+        .progress {
+            position: relative;
+            width: 100%;
+            height: 1rem;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: url("./img/jindutiao_1.png") 0 0;
+            background-size: 100% 100%;
+        }
+    </style>
+    <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+    
+    <script>
+        $(function () {
+            NProgress.configure({
+                template: $('#myId').html(), // template是用来设置动画样式的属性
+                trickleRate: 0.1, trickleSpeed: 100
+            });
+            
+            NProgress.start()
+            console.log(NProgress)
+            var num = 0
+            setInterval(function() {
+                num += 10
+                var proNum = `${num}%`
+                $('.lead').html(proNum)
+                
+            },100)
+
+            $(window).load(function () {
+                setTimeout(function() {
+                    NProgress.done()
+                    $('.main').css('visibility', 'visible')
+                },200)
+            })
+        })
+    </script>
+    <script type="text" id="myId">
+        <br>
+        <div class="splash card"><br>
+            <p class="lead" style="text-align:center"></p>
+
+            <div class="progress">
+                <div class="barcontainer">
+                    <div class="mybar" role="bar">
+                        <img src="./img/jindutiao_3.png" >
+                    </div>
+                </div>
+            </div>
+        </div><br>
+    </script>
+
 </head>
 
 <body>
-    <div class="main">
-
+    <div class="main" style="visibility: hidden;">
+        
         <div class="page-1">
             <div class="template">
                 <img src="" alt="">
@@ -108,30 +350,43 @@
             <div class="autograph_container">
                 <canvas id="c4"></canvas>
             </div>
-            <div class="button_clear">
-                重新签名
+            <div class="input_container">
+                <input type="text" value="" name="input" placeholder="请在这里输入姓名">
             </div>
-           <div class="change_templage btn"></div>
-           <div class="ok btn"></div>
+            <div class="button_clear">
+
+            </div>
+            <div class="change_templage btn"></div>
+            <div class="ok btn"></div>
         </div>
 
         <div class="page-2">
-            <img src = "" alt="" class="path">
-            <div style="display:none;">
-                <canvas id="textrue" wdith="320" height= 400></canvas>
+            <div class="photo">
+                <img src="" alt="" class="path">
             </div>
-            <!-- <div class="page-2-img">
-                <img src="" alt="" >
-            </div> -->
+            <div class="save">
+            </div>
+            <div class="baidu">
+            </div>
+            <div class="search">
+            </div>
+            <div class="share_btn">
+            </div>
+            <div style="display: none">
+                <!-- <canvas id="textrue" width="108" height="192" style="border:1px solid"></canvas> -->
+                <canvas id="textrue" width="1080" height="1920" style="border:1px solid"></canvas>
+            </div>
+        </div>
+        <div class="share">
         </div>
     </div>
 
 </body>
-<script src="js/jquery-2.1.4.min.js"></script>
+
 <script src="js/canvasSign.jquery.js"></script>
 <script>
     $(function () {
-      
+
 
         let canvasWidth = parseInt($('.autograph_container').css('width'))
         let canvasHeight = parseInt($('.autograph_container').css('height'))
@@ -141,11 +396,11 @@
             lineWidth: 8,	//笔画最大线条宽度
             minLineWidth: 1,//最小线条宽度
             maskIng: {		//遮罩 只能规定字体，并且只能垂直居中显示
-                isMask: false, //默认没有
-                maskText: '在这里签名',  //遮罩text
+                isMask: true, //默认没有
+                maskText: '请在这里手写签名',  //遮罩text
                 maskLineHeight: 40,	//遮罩text行高，默认40
-                maskFont: 'bold 26px 微软雅黑', //遮罩字体
-                maskColor: '#000'	//文本颜色
+                maskFont: 'bold 26px 楷体', //遮罩字体
+                maskColor: '#7D7D7D'	//文本颜色
             },
             lineColor: 'block',	//线条颜色 默认黑色
             bgColor: 'rgba(255,255,255,0)', //背景颜色
@@ -154,58 +409,96 @@
         }
         const template = [
             'img/iphone1.jpeg',
-            'img/anniu_2.png',
+            'img/anniu_1.png',
             'img/anniu_3.png',
         ]
-        let index = 0
+
         $('#c4').canvasSign(config);
         $('.button_clear').click(function () {
             $('#c4').clear()
         });
+
         // 设置图片模板
+        let index = 0
+        $('.input_container ').css('display', 'none')
         $('.template > img').attr('src', template[0])
-        $('.change_templage').click(function() {
-            index ++
+        $('.change_templage').click(function () {
+            index++
             console.log(index)
-            if (index == template.length ) {
+            if (index == template.length) {
                 index = 0
             }
             $('.template > img').attr('src', template[index])
+            // index 为1的时候，变为输入框
+            if (index == 1) {
+                $('.autograph_container ').css('display', 'none')
+                $('.input_container').css('display', 'block')
+            } else {
+                $('.input_container ').css('display', 'none')
+                $('.autograph_container').css('display', 'block')
+            }
         })
         let dataURL = ''
-        // 生成签名
-        $('.ok').click(function () {
+        var ctx = document.getElementById('textrue').getContext('2d');
+        // 点击生成签名
+        $('.ok').on('touchstart', function () {
             dataURL = $('#c4').getDataURL();
-            
-            $('.page-1 ').css('display','none')
-            $('.page-2 ').css('display','block')
-            // $('.page-2-img > img').attr('src', dataURL)
-            draw()
-        })
 
-        function draw() {
-            var ctx = document.getElementById('textrue').getContext('2d');
+
+            $('.page-1 ').css('display', 'none')
+            $('.page-2 ').css('display', 'block')
+
+            // 合成背景图
             var imgbg = new Image()
-            var imgtextrue = new Image()
-
             imgbg.src = template[index]
             imgbg.onload = function () {
-                ctx.drawImage(imgbg, 0, 0,300,400)
+            ctx.drawImage(imgbg, 0, 0, 1080, 1920)
+            
+                if (index == 1) {
+                    input()
+                } else {
+                    draw()
+                }
             }
+        })
 
-            imgtextrue.src = dataURL 
+        // 合成图片
+        function draw() {
+            // 签名
+            var imgtextrue = new Image()
+            imgtextrue.src = dataURL
             imgtextrue.onload = function () {
-                ctx.drawImage(imgtextrue, 0, 0, 200, 100)
+                ctx.setTransform(1, 0, 0, 1, 600, 800);
+                ctx.rotate(22 * Math.PI / 180);
+                ctx.drawImage(imgtextrue, 0, 0, 120, 60) //生成签名尺寸
                 // todataurl 跨域，应该使用本域下的图片
                 var path = document.getElementById('textrue').toDataURL()
-                console.log(path)
                 $('.path').attr('src', path)
             }
+        }
+        // 输入名字
+        function input() {
+            var inputName = $(" input[ name='input' ] ").val()
 
-            
+            ctx.font = '66px 楷体';
+            ctx.fillStyle = '#000';
+            ctx.fillText(inputName, 270, 200);
+
+            var path = document.getElementById('textrue').toDataURL()
+            $('.path').attr('src', path)
+
         }
 
-
+        //分享
+        $('.share_btn').on('touchstart', function () {
+            $('.share').css('display', 'block')
+        })
+        $('.share').on('touchstart', function () {
+            $('.share').css('display', 'none')
+        })
+        $('.baidu').on('touchstart', function () {
+            $(window).attr('location', 'https://www.baidu.com/');
+        })
         /*微信白条*/
         $('body').on('touchmove', function (event) {
             event.preventDefault();
