@@ -1,0 +1,272 @@
+ * {
+     margin: 0;
+     padding: 0;
+ }
+ 
+ html, body {
+     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+     overflow: hidden;
+     overflow-y: auto;
+     width: 100%;
+     max-width: 640px;
+     height: 100%;
+     margin: auto;
+ }
+ 
+ .main {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     background: url("../img/beijing.png") 0 0;
+     background-size: 100% 100%;
+ }
+ 
+ .page-1 {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: 2;
+ }
+ 
+ .page-2 {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: 1;
+     display: none;
+ }
+ 
+ .share {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     z-index: 2;
+     display: none;
+     background: url("../img/zhezhao.png") 0 0;
+     background-size: 100% 100%;
+ }
+ 
+ .template {
+     position: absolute;
+     width: 90%;
+     height: 8rem;
+     top: 20px;
+     left: 5%;
+     overflow: hidden;
+ }
+ 
+ .template img {
+     width: 100%;
+ }
+ 
+ .autograph_container {
+     position: absolute;
+     top: 10rem;
+     left: 5%;
+     width: 90%;
+     height: 5rem;
+     border: 2px solid #eee;
+     overflow: hidden;
+ }
+ 
+ .input_container {
+     position: absolute;
+     top: 10rem;
+     left: 5%;
+     width: 90%;
+     height: 5rem;
+     border: 2px solid #eee;
+     overflow: hidden;
+ }
+ 
+ .input_container input {
+     width: 100%;
+     height: 100%;
+     border: none;
+     font-size: 2rem;
+ }
+ 
+ .button_clear {
+     position: absolute;
+     background: url("../img/qianming_2.png") 0 0;
+     background-size: 100% 100%;
+     bottom: 7rem;
+     left: 40%;
+     width: 20%;
+     height: 0.9rem;
+ }
+ 
+ .btn {
+     position: absolute;
+     width: 40%;
+     height: 2rem;
+     left: 30%;
+     height: 1.6rem;
+ }
+ 
+ .change_templage {
+     bottom: 4.5rem;
+     background: url("../img/anniu_1.png") 0 0;
+     background-size: 100% 100%;
+ }
+ 
+ .ok {
+     bottom: 2rem;
+     background: url("../img/anniu_2.png") 0 0;
+     background-size: 100% 100%;
+ }
+ 
+ .photo {
+     position: absolute;
+     top: 5%;
+     left: 5%;
+     width: 90%;
+     height: 15rem;
+     overflow: hidden;
+ }
+ 
+ .photo img {
+     width: 100%;
+     position: absolute;
+ }
+ 
+ .save {
+     position: absolute;
+     background: url("../img/baocun.png") 0 0;
+     background-size: 100% 100%;
+     bottom: 7rem;
+     left: 35%;
+     width: 30%;
+     height: .8rem;
+ }
+ 
+ .baidu {
+     position: absolute;
+     background: url("../img/biaoti.png") 0 0;
+     background-size: 100% 100%;
+     bottom: 5rem;
+     left: 5%;
+     width: 90%;
+     height: 1rem;
+ }
+ 
+ .search {
+     position: absolute;
+     background: url("../img/anniu_5.png") 0 0;
+     background-size: 100% 100%;
+     bottom: 2rem;
+     left: 5%;
+     width: 60%;
+     height: 1.5rem;
+ }
+ 
+ .share_btn {
+     position: absolute;
+     background: url("../img/anniu_3.png") 0 0;
+     background-size: 100% 100%;
+     bottom: 2rem;
+     right: 5%;
+     width: 27%;
+     height: 1.5rem;
+ }
+ 
+ input::-webkit-input-placeholder {
+     /* WebKit browsers */
+     color: #7D7D7D;
+     font-size: 30px;
+     text-align: center;
+ }
+ 
+ input:-moz-placeholder {
+     /* Mozilla Firefox 4 to 18 */
+     color: #7D7D7D;
+     font-size: 30px;
+     text-align: center;
+ }
+ 
+ input::-moz-placeholder {
+     /* Mozilla Firefox 19+ */
+     color: #7D7D7D;
+     font-size: 30px;
+     text-align: center;
+ }
+ 
+ input:-ms-input-placeholder {
+     /* Internet Explorer 10+ */
+     color: #7D7D7D;
+     font-size: 30px;
+     text-align: center;
+ }
+ 
+ #nprogress {
+     position: fixed;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     background-color: #f7f7f7;
+     z-index: 999;
+     background: url("../img/beijing.png") 0 0;
+     background-size: 100% 100%;
+ }
+ 
+ .spinner-icon {
+     display: none!important;
+ }
+ 
+ .splash {
+     position: absolute;
+     top: 20%;
+     left: 0;
+     right: 0;
+     margin: auto;
+ }
+ 
+ .splash img {
+     display: block;
+     width: 0.7rem;
+     position: absolute;
+     top: -0.15rem;
+     right: 0;
+ }
+ 
+ .card {
+     padding: 20px 25px 15px;
+     margin: 0 auto 25px;
+     width: 70%;
+ }
+ 
+ .mybar {
+     background: #2971FF;
+     height: .4rem;
+     border-radius: 1rem;
+     position: absolute;
+     overflow-x: hidden;
+     width: 100%;
+ }
+ 
+ .barcontainer {
+     position: absolute;
+     top: 30%;
+     width: 95%;
+     height: .4rem;
+     left: 4%;
+     border-radius: 1rem;
+     overflow-x: hidden;
+ }
+ 
+ .progress {
+     position: relative;
+     width: 100%;
+     height: 1rem;
+     border-radius: 1rem;
+     overflow: hidden;
+     background: url("../img/jindutiao_1.png") 0 0;
+     background-size: 100% 100%;
+ }
