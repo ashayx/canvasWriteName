@@ -9,20 +9,16 @@
     <script src="./js/config.js"></script>
 
     <script src="js/jquery-2.1.4.min.js"></script>
-    <script src=http://res.wx.qq.com/open/js/jweixin-1.2.0.js></script>
-    <script type=text/javascript src=http://www.bjweifeng.cn/zimuWx/js/yundaoWxV2.0.js></script>
-    <script>
-        yundaoWx.share_title = "飞机";
-        yundaoWx.share_desc = "飞机";
-        yundaoWx.share_link = "";
-        yundaoWx.share_imgUrl = "http://h5.sjzzimu.com/holiday/static/min.png";
-        yundaoWx.share();
-    </script>
     
+    
+
     <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
+    <link rel="stylesheet" href="./css/pace-theme-big-counter.css">
     <link rel="stylesheet" href="./css/main.css">
+
     <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script> 
-    
+    <script src="js/pace.min.js"></script>
+
     <script type="text" id="myId">
         <br>
         <div class="splash card"><br>
@@ -37,35 +33,29 @@
             </div>
         </div><br>
     </script>
+    <!-- 分享 -->
+    <script src=http://res.wx.qq.com/open/js/jweixin-1.2.0.js></script>
+    <script type=text/javascript src=http://www.bjweifeng.cn/zimuWx/js/yundaoWxV2.0.js></script>
     <script>
-        $(function () {
-            NProgress.configure({
-                template: $('#myId').html(), // template是用来设置动画样式的属性
-                trickleRate: 0.1, trickleSpeed: 100
-            });
+        yundaoWx.share_title = "标题";
+        yundaoWx.share_desc = "描述";
+        yundaoWx.share_link = "http://h5.sjzzimu.com/baidufeiji/index.html";
+        yundaoWx.share_imgUrl = "http://h5.sjzzimu.com/holiday/static/min.png";
+        yundaoWx.share();
+    </script>
+    <!-- 统计 -->
+    
+    <script>
+        var _mtac = {};
+        (function () {
+            var mta = document.createElement("script");
+            mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
+            mta.setAttribute("name", "MTAH5");
+            mta.setAttribute("sid", "500530692");
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(mta, s);
+        })();
 
-            NProgress.start()
-            
-            $(window).load(function () {
-                $('.lead').html('100%')
-                setTimeout(function () {
-                    NProgress.done()
-                    $('.main').css('visibility', 'visible')
-                }, 200)
-            })
-
-            var num = 0
-            var timer = setInterval(function () {
-                num += 10
-                var proNum = `${num}%`
-                $('.lead').html(proNum)
-                if(num >= 90) {
-                    clearInterval(timer)
-                }
-            }, 100)
-
-            
-        })
     </script>
 
 </head>
@@ -116,7 +106,19 @@
 <script src="js/canvasSign.jquery.js"></script>
 <script>
     $(function () {
+         NProgress.configure({
+            template: $('#myId').html(), // template是用来设置动画样式的属性
+            trickleRate: 0.1, trickleSpeed: 100
+        });
 
+        NProgress.start()
+        // 加载完
+        Pace.on('done', function () {
+            Pace.stop()
+            NProgress.done()
+            $('.main').css('visibility', 'visible')
+
+        })
 
         let canvasWidth = parseInt($('.autograph_container').css('width'))
         let canvasHeight = parseInt($('.autograph_container').css('height'))
