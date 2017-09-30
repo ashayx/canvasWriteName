@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
     <meta name=format-detection content="telephone=no">
-    <title>飞机</title>
+    <title>国庆私人飞机</title>
     <script src="./js/config.js"></script>
     <script src="js/jquery-2.1.4.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
@@ -33,10 +33,10 @@
     <script src=http://res.wx.qq.com/open/js/jweixin-1.2.0.js></script>
     <script type=text/javascript src=http://www.bjweifeng.cn/zimuWx/js/yundaoWxV2.0.js></script>
     <script>
-        yundaoWx.share_title = "标题";
-        yundaoWx.share_desc = "描述";
-        yundaoWx.share_link = "http://h5.sjzzimu.com/baidufeiji/index.html";
-        yundaoWx.share_imgUrl = "http://h5.sjzzimu.com/holiday/static/min.png";
+        yundaoWx.share_title = "送你一架私人飞机";
+        yundaoWx.share_desc = "一言九鼎，不信戳进来";
+        yundaoWx.share_link = "http://h5.sjzzimu.com/baiduaircraft/index.html";
+        yundaoWx.share_imgUrl = "http://h5.sjzzimu.com/baiduaircraft/img/min.png";
         yundaoWx.share();
     </script>
     <!-- 统计 -->
@@ -56,24 +56,72 @@
 
 </head>
 <style>
-    .select {
+    .page {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("./img/beijing.png") 0 0;
+        background-size: 100% 100%;
+    }
+    .select-container {
         position: fixed;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
-        background-color: #f7f7f7;
         z-index: 100;
         background: url("./img/mcbj.png") 0 0;
+        display: none;
+    }
+     .go {
+        position: absolute;
+        background: url("./img/anniu_4.png") 0 0;
         background-size: 100% 100%;
-        padding-top: 15%;
+        bottom: 2rem;
+        right: 5%;
+        width: 27%;
+        height: 1.5rem;
+    }
+    .select {
+        position: absolute;
+        left: 5%;
+        bottom: 5%;
+        width: 90%;
+        height: 83%;
+        background-color: #f7f7f7;
+        z-index: 100;
+        background: url("./img/dikuang.png") 0 0;
+        background-size: 100% 100%;
+        padding-top: 12%;
+        
+    }
+    .select .selected {
+        color: #000;
+    }
+    .close {
+        display: block;
+        position: absolute;
+        top: .2rem;
+        right: .2rem;
+        width:1.5rem;
+        height: 1.5rem;
+        background: url("./img/guanbi.png") 0 0;
+        background-size: 100% 100%;
     }
     .item {
-        width: 27%;
-        float: left;
-        margin-left: 5%;
-        margin-top: 1.2rem;
+        width: 100%;
+        height: 5%;
+        font-size: .45rem;
+        padding:0 5%;
+        color: #717171;
+        overflow: hidden;
+        white-space: nowrap; text-overflow: ellipsis;
     }
+    
     .item img {
         width: 100%;
     }
@@ -82,33 +130,26 @@
         background: url("./img/xzjc.png") 0 0;
         background-size: 100% 100%;
     }
-    .button_clear {
-        position: absolute;
-        background: url(../img/qianming_2.png) 0 0;
-        background-size: 100% 100%;
-        bottom: 9rem;
-        left: 40%;
-        width: 20%;
-        height: 0.9rem;
-    }
 </style>
 <body>
     <div class="main" style="visibility: hidden;">
-        <div class="select">
-            <div class="selectaddr"></div>
+        <div class="select-container">
+            <div class="select">
+                <span class="close"></span>
+                <span class="selectaddr"></span>
+            </div>
         </div>
         <div class="page-1">
             <div class="template">
                 <img src="" alt="">
             </div>
-            <div class="autograph_container" style="background: #fff">
+            <!-- <div class="autograph_container" style="background: #fff">
                 <canvas id="c4"></canvas>
-            </div>
+            </div> -->
             <div class="input_container">
                 <input type="text" value="" name="input" placeholder="请在这里输入姓名">
             </div>
-            <div class="button_clear">
-            </div>
+            
             <div class="change_addr btn"></div>
             <div class="change_templage btn"></div>
             <div class="ok btn"></div>
@@ -116,7 +157,7 @@
 
         <div class="page-2">
             <div class="photo" style=" border: 1px #eee solid;">
-                <img src="" alt="" class="path" style="top:-3rem;">
+                <img src="" alt="" class="path" style="top:-2rem;">
             </div>
             <div class="save">
             </div>
@@ -128,31 +169,56 @@
             </div>
             <div style="display: none">
                 <!-- <canvas id="textrue" width="108" height="192" style="border:1px solid"></canvas> -->
-                <canvas id="textrue" width="556" height="700" style="border:1px solid"></canvas>
+                <canvas id="textrue" width="556" height="713" style="border:1px solid"></canvas>
             </div>
         </div>
         <div class="share">
+        </div>
+        <div class="page" style="z-index: 20">
+            <div class="photo shareSrc" style=" border: 1px #eee solid;">
+                <img src="" alt="" class="sharesrc" style="top:-2rem;">
+            </div>
+            <div class="baidu">
+            </div>
+            <div class="search">
+            </div>
+            <div class="go">
+            </div>
         </div>
     </div>
 
 </body>
 
-<script src="js/canvasSign.jquery.js"></script>
 <script>
+    
     $(function () {
-         NProgress.configure({
+        var windowH = $(window).height()
+        
+        NProgress.configure({
             template: $('#myId').html(), // template是用来设置动画样式的属性
-            trickleRate: 0.1, trickleSpeed: 100
         });
-
         NProgress.start()
         // 加载完
         Pace.on('done', function () {
             Pace.stop()
             NProgress.done()
             $('.main').css('visibility', 'visible')
+            $('.page-1').css('height', windowH)
 
         })
+
+        var sharesrc = yundaoWx.getUrlParam('fromId')
+        console.log(sharesrc)
+        if (sharesrc == null) {
+            $('.page').css('display', 'none')
+        }
+        $('.sharesrc').attr('src', sharesrc)
+        $('.go').on('touchstart', function () {
+            $('.page').css('display', 'none')
+        })
+        
+
+        
         // 不同系统模板图片不同
         var u = navigator.userAgent, app = navigator.appVersion;
         var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
@@ -164,87 +230,86 @@
             var template = [
                 'img/1ios.png',
                 'img/2ios.png',
+                'img/3ios.png',
                 'img/4ios.png',
-                'img/5ios.png',
             ]
             console.log('ios')
         } else if (isAndroid) {
             var template = [
                 'img/1android.png',
                 'img/2android.png',
+                'img/3android.png',
                 'img/4android.png',
-                'img/5android.png',
             ]
             console.log('android')
         }
         const addr = [
-            "巴黎戴高乐机场",
-            "北京首都国际机场",
-            "成都双流国际机场",
-            "广州白云国际机场",
-            "贵阳龙洞堡机场",
-            "哈尔滨太平国际机场",
-            "海口美兰国际机场",
-            "杭州萧山国际机场",
-            "里约热内卢机场",
-            "洛杉矶国际机场",
-            "南京禄口国际机场",
-            "青岛流亭机场",
-            "厦门高崎国际机场",
-            "上海虹桥国际机场",
-            "深圳宝安国际机场",
-            "沈阳桃仙国际机场",
-            "石家庄正定国际机场",
-            "悉尼·京斯福特·史密斯机场",
-            "西安咸阳国际机场",
-            "重庆江北国际机场",
+            '巴黎 • Charles De Gaulle Airport',
+            '北京 • 首都国际机场',
+            '成都 • 双流国际机场',
+            '广州 • 白云国际机场',
+            '贵阳 • 龙洞堡机场',
+            '哈尔 • 滨太平国际机场',
+            '海口 • 美兰国际机场',
+            '杭州 • 萧山国际机场',
+            '巴西 • Rio De Janeiro Airport',
+            '美国 • Los Angeles International Airport',
+            '南京 • 禄口国际机场',
+            '青岛 • 流亭机场',
+            '厦门 • 高崎国际机场',
+            '上海 • 虹桥国际机场',
+            '深圳 • 宝安国际机场',
+            '沈阳 • 桃仙国际机场',
+            '石家庄 • 正定国际机场',
+            '西安 • 咸阳国际机场',
+            '澳大利亚 • Sydney Kingsford Smith International Airport',
+            '重庆 • 江北国际机场',
         ]
+        const canvasAddr = [
+                '巴黎 • Charles De G....',
+                '北京 • 首都国际机场',
+                '成都 • 双流国际机场',
+                '广州 • 白云国际机场',
+                '贵阳 • 龙洞堡机场',
+                '哈尔 • 滨太平国际机场',
+                '海口 • 美兰国际机场',
+                '杭州 • 萧山国际机场',
+                '巴西 • Rio De Janei....',
+                '美国 • Los Angeles ....',
+                '南京 • 禄口国际机场',
+                '青岛 • 流亭机场',
+                '厦门 • 高崎国际机场',
+                '上海 • 虹桥国际机场',
+                '深圳 • 宝安国际机场',
+                '沈阳 • 桃仙国际机场',
+                '石家庄 • 正定国际机场',
+                '西安 • 咸阳国际机场',
+                '澳大利亚 • Sydney Ki...',
+                '重庆 • 江北国际机场',
+            ]
         // 添加飞机场地址
         let selectAddr = ''
-
+        
         for (let i = 0; i < 20; i++) {
             let classIndex = parseInt(`${i}-item`)
             let className = `.${i}-item`
-            $('.selectaddr').before("<div  class=" + `${i}-item` +"><img src='./img/" + `${i+1}` +".png'></div>")
+            // $('.selectaddr').before("<div  class=" + `${i}-item` +"><img src='./img/" + `${i+1}` +".png'></div>")
+            $('.selectaddr').before("<div  class=" + `${i}-item` +  ">" + addr[i] + "</div>")
             $(className).on('touchstart', function () {
-                console.log(className, classIndex)
-                selectAddr = addr[classIndex]
+                $(className).addClass('selected')
+                selectAddr = canvasAddr[classIndex]
                 console.log(selectAddr)
-                $('.select').fadeOut()
+                $('.select-container').fadeOut()
             })
         }    
         $('.select > div').addClass('item')
         $('.change_addr').on('touchstart', function () {
-            $('.select').fadeIn()
+            $('.select-container').fadeIn()
+             $('.select > div').removeClass('selected')
         })
-        
-
-        let canvasWidth = parseInt($('.autograph_container').css('width'))
-        let canvasHeight = parseInt($('.autograph_container').css('height'))
-        config = {
-            width: canvasWidth,	//canvas宽度
-            height: canvasHeight,	//canvas高度
-            lineWidth: 8,	//笔画最大线条宽度
-            minLineWidth: 1,//最小线条宽度
-            maskIng: {		//遮罩 只能规定字体，并且只能垂直居中显示
-                isMask: true, //默认没有
-                maskText: '请在这里手写签名',  //遮罩text
-                maskLineHeight: 40,	//遮罩text行高，默认40
-                maskFont: 'bold 26px 楷体', //遮罩字体
-                maskColor: '#7D7D7D'	//文本颜色
-            },
-            lineColor: 'block',	//线条颜色 默认黑色
-            bgColor: 'rgba(255,255,255,0)', //背景颜色
-            bgImgSrc: null,	//背景图片 默认为空
-            bgRetain: true	//false ：在写的过程中会清空背景图片及背景颜色 true ：会保留背景图片及背景颜色
-        }
-        
-
-        $('#c4').canvasSign(config);
-        $('.button_clear').click(function () {
-            $('#c4').clear()
-        });
-
+        $('.close').on('touchstart', function () {
+            $('.select-container').fadeOut()
+        })
         // 设置图片模板
         let index = 0
         $('.input_container ').css('display', 'display')
@@ -259,25 +324,16 @@
                 index = 0
             }
             $('.template > img').attr('src', template[index])
-            // index 为1的时候，变为输入框
-            if (index == 3) {
-                $('.input_container ').css('display', 'none')
-                $('.autograph_container').css('display', 'block')
-                $('.button_clear').css('display', 'block')
-                
-            } else {
-                $('.autograph_container ').css('display', 'none')
-                $('.input_container').css('display', 'block')
-                $('.button_clear').css('display', 'none')
-            }
+        
         })
         let dataURL = ''
         var ctx = document.getElementById('textrue').getContext('2d');
         // 点击生成签名
         $('.ok').on('touchstart', function () {
-            dataURL = $('#c4').getDataURL();
-
-
+            if (!selectAddr) {
+                alert('请选择机场!')
+                return
+            }
             $('.page-1 ').css('display', 'none')
             $('.page-2 ').css('display', 'block')
 
@@ -285,55 +341,55 @@
             var imgbg = new Image()
             imgbg.src = template[index]
             imgbg.onload = function () {
-            ctx.drawImage(imgbg, 0, 0, 556, 700)
+            ctx.drawImage(imgbg, 0, 0, 556, 713)
             // 机场地址
             ctx.font = '40px 黑体';
-            ctx.fillStyle = '#67789d';
-            ctx.fillText(selectAddr, 30, 670);
-                //判断模板合成
-                if (index == 3) {
-                    console.log(index)
-                    draw()
-                } else {
-                    input()
-                }
+            ctx.fillStyle = '#576B95';
+            ctx.fillText(selectAddr, 30, 673);
+            // 输入内容
+            input()
             }
         })
-
-        // 合成图片
-        function draw() {
-            // 签名
-            var imgtextrue = new Image()
-            imgtextrue.src = dataURL
-            imgtextrue.onload = function () {
-                ctx.setTransform(1, 0, 0, 1, 253, 310);
-                ctx.rotate(-10 * Math.PI / 180);
-                ctx.drawImage(imgtextrue, 0, 0, 80, 40) //生成签名尺寸
-                // todataurl 跨域，应该使用本域下的图片
-                var path = document.getElementById('textrue').toDataURL("image/jpeg", 1.0)
-                $('.path').attr('src', path)
-            }
-        }
         // 输入名字
+        window.pagePath = null
         function input() {
             var inputName = $(" input[ name='input' ] ").val()
             if(index == 0 ) {
                 ctx.font = '13px 黑体';
                 ctx.fillStyle = '#415a69';
-                ctx.fillText(inputName, 380, 135);
+                ctx.fillText(inputName, 380, 126);
             }else if(index == 1) {
                 ctx.font = '10px 黑体';
-                ctx.fillStyle = '#000';
-                ctx.fillText(inputName, 366, 433);
+                ctx.fillStyle = '#d4d4d5'; 
+                ctx.fillText(inputName, 416, 449);
+            } else if (index == 2) {
+                ctx.font = '13px 黑体';
+                ctx.fillStyle = '#340101';
+                ctx.fillText(inputName, 255, 340);
             }else {
                 ctx.font = '13px 黑体';
-                ctx.fillStyle = '#6d7990';
-                ctx.fillText(inputName, 168, 200);
+                ctx.fillStyle = '#415a69';
+                ctx.fillText(inputName, 403, 117);
             }
-            var path = document.getElementById('textrue').toDataURL("image/jpeg", 1.0)
+
+            var path = document.getElementById('textrue').toDataURL("image/jpeg", 1)
+            
             $('.path').attr('src', path)
 
+           $.post('http://h5.sjzzimu.com/weixinUpload/uploadImage.action', {
+                base: path,
+            }, function (response) {
+                console.log(response)
+                window.pagePath = response
+                yundaoWx.share_title = "送你一架私人飞机";
+                yundaoWx.share_desc = "一言九鼎，不信戳进来";
+                yundaoWx.share_link = "http://h5.sjzzimu.com/baiduaircraft/index.html?fromId=" + pagePath;
+                yundaoWx.share_imgUrl = "http://h5.sjzzimu.com/baiduaircraft/img/min.png";
+                yundaoWx.share();
+            })
+
         }
+        
 
         //分享
         $('.share_btn').on('touchstart', function () {
@@ -342,14 +398,14 @@
         $('.share').on('touchstart', function () {
             $('.share').css('display', 'none')
         })
-        $('.baidu').on('touchstart', function () {
-            $(window).attr('location', 'https://www.baidu.com/');
+        $('.search').on('touchstart', function () {
+            $(window).attr('location', 'https://rc.mbd.baidu.com/ljf8wsa');
         })
         /*微信白条*/
         $('body').on('touchmove', function (event) {
             event.preventDefault();
         })
-        console.log(template)
+       
     })
 
 </script>
