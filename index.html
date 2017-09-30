@@ -126,10 +126,38 @@
         width: 100%;
     }
     .change_addr {
-        bottom: 7rem;
+        bottom: 4rem;
         background: url("./img/xzjc.png") 0 0;
         background-size: 100% 100%;
     }
+    .back {
+        position: absolute;
+        bottom: 6.6rem;
+        left: 5%;
+        width: .8rem;
+        height: .8rem;
+    }
+    .back img {
+        width: 100%;
+    }
+    .ani {
+        animation-name: pulse;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+    }
+    @keyframes pulse {
+        from {
+            transform: scale3d(1, 1, 1);
+        }
+
+        50% {
+            transform: scale3d(1.15, 1.15, 1.15);
+        }
+
+        to {
+            transform: scale3d(1, 1, 1);
+        }
+        }
 </style>
 <body>
     <div class="main" style="visibility: hidden;">
@@ -159,11 +187,15 @@
             <div class="photo" style=" border: 1px #eee solid;">
                 <img src="" alt="" class="path" style="top:-2rem;">
             </div>
+            <div class="back">
+                <img src="img/back.png" alt="">
+            </div>
             <div class="save">
             </div>
             <div class="baidu">
             </div>
             <div class="search">
+                <img src="./img/search.png" alt="" style="width: 0.9rem;position: absolute;right: 1px;top: 22%;" class="ani">
             </div>
             <div class="share_btn">
             </div>
@@ -174,6 +206,7 @@
         </div>
         <div class="share">
         </div>
+        <!-- 分享给别人页面 -->
         <div class="page" style="z-index: 20">
             <div class="photo shareSrc" style=" border: 1px #eee solid;">
                 <img src="" alt="" class="sharesrc" style="top:-2rem;">
@@ -181,6 +214,7 @@
             <div class="baidu">
             </div>
             <div class="search">
+                <img src="./img/search.png" alt="" style="width: 0.9rem;position: absolute;right: 1px;top: 22%;" class="ani">
             </div>
             <div class="go">
             </div>
@@ -245,7 +279,7 @@
         }
         const addr = [
             '巴黎 • Charles De Gaulle Airport',
-            '北京 • 首都国际机场',
+            '北京 • 首都国际私人停机港',
             '成都 • 双流国际机场',
             '广州 • 白云国际机场',
             '贵阳 • 龙洞堡机场',
@@ -266,16 +300,16 @@
             '重庆 • 江北国际机场',
         ]
         const canvasAddr = [
-                '巴黎 • Charles De G....',
-                '北京 • 首都国际机场',
+                '巴黎 • Charles De Gaulle Airport',
+                '北京 • 首都国际私人停机港',
                 '成都 • 双流国际机场',
                 '广州 • 白云国际机场',
                 '贵阳 • 龙洞堡机场',
                 '哈尔 • 滨太平国际机场',
                 '海口 • 美兰国际机场',
                 '杭州 • 萧山国际机场',
-                '巴西 • Rio De Janei....',
-                '美国 • Los Angeles ....',
+                '巴西 • Rio De Janeiro Airport',
+                '美国 • Los Angeles International A....',
                 '南京 • 禄口国际机场',
                 '青岛 • 流亭机场',
                 '厦门 • 高崎国际机场',
@@ -284,9 +318,10 @@
                 '沈阳 • 桃仙国际机场',
                 '石家庄 • 正定国际机场',
                 '西安 • 咸阳国际机场',
-                '澳大利亚 • Sydney Ki...',
+                '澳大利亚 • Sydney Kingsford Smith ....',
                 '重庆 • 江北国际机场',
             ]
+
         // 添加飞机场地址
         let selectAddr = ''
         
@@ -299,7 +334,7 @@
                 $(className).addClass('selected')
                 selectAddr = canvasAddr[classIndex]
                 console.log(selectAddr)
-                $('.select-container').fadeOut()
+                $('.select-container').fadeOut(1000)
             })
         }    
         $('.select > div').addClass('item')
@@ -330,6 +365,10 @@
         var ctx = document.getElementById('textrue').getContext('2d');
         // 点击生成签名
         $('.ok').on('touchstart', function () {
+            if(!$(" input[ name='input' ] ").val()) {
+                alert('请输入姓名！')
+                return
+            }
             if (!selectAddr) {
                 alert('请选择机场!')
                 return
@@ -343,9 +382,9 @@
             imgbg.onload = function () {
             ctx.drawImage(imgbg, 0, 0, 556, 713)
             // 机场地址
-            ctx.font = '40px 黑体';
+            ctx.font = '30px 黑体';
             ctx.fillStyle = '#576B95';
-            ctx.fillText(selectAddr, 30, 673);
+            ctx.fillText(selectAddr, 0, 673);
             // 输入内容
             input()
             }
@@ -357,7 +396,7 @@
             if(index == 0 ) {
                 ctx.font = '13px 黑体';
                 ctx.fillStyle = '#415a69';
-                ctx.fillText(inputName, 380, 126);
+                ctx.fillText(inputName, 379, 126);
             }else if(index == 1) {
                 ctx.font = '10px 黑体';
                 ctx.fillStyle = '#d4d4d5'; 
@@ -390,7 +429,10 @@
 
         }
         
-
+        $('.back').on('touchstart', function () {
+            $('.page-2 ').css('display', 'none')
+            $('.page-1 ').css('display', 'block')
+        })
         //分享
         $('.share_btn').on('touchstart', function () {
             $('.share').css('display', 'block')
